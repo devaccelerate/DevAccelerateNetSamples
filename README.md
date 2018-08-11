@@ -8,4 +8,4 @@
 
 ### Issues
 
-If you find a bug in the library or you have an idea about a new feature, please try to search in the existing list of [issues](https://github.com/devaccelerate/samples/issues). If the bug or idea is not listed and addressed there, please [open a new issue<](https://github.com/devaccelerate/samples/issues/new).
+If you find a bug in the library or you have an idea about a new feature, please try to search in the existing list of [issues](https://github.com/devaccelerate/samples/issues). If the bug or idea is not listed and addressed there, please [open a new issue](https://github.com/devaccelerate/samples/issues/new).
