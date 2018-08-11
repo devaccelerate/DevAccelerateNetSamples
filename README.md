@@ -2,7 +2,7 @@
 
 **DevAccelerate Samples** is a collection of Microsoft .NET projects that demonstrate the use of different DevAccelerate libraries. The usage of the library is governed by the terms and conditions of its [License](https://github.com/devaccelerate/samples/blob/master/LICENSE).
 
-### Samples Available
+### Samples Included
 
 * Microsoft ASP.NET MVC 5 Sample
 
