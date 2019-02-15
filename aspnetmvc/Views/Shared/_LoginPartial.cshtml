@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+<ul class="navbar-nav ml-auto">
+    @if (Request.IsAuthenticated)
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Hello @User.Identity.GetUserName()
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="@Url.Action("Index", "Manage", new { area = ""})">Manage</a>
+                @using (Html.BeginForm("LogOff", "Account", new { area="" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a class="dropdown-item" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                }
+            </div>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Login", "Account", new { area = ""})">Login</a>
+        </li>
+    }
+</ul>

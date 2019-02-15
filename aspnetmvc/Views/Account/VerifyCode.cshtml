@@ -1,0 +1,32 @@
+﻿@model Ejyle.DevAccelerate.Samples.AspNetMvc.Models.VerifyCodeViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Code Verification";
+}
+
+@using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("provider", @Model.Provider)
+    @Html.Hidden("rememberMe", @Model.RememberMe)
+    <p class="lead">Enter verification code</p>
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <p>
+        <label for="inputCode">Code</label>
+        @Html.TextBoxFor(m => m.Code, new { id = "inputCode", @class = "form-control" })
+    </p>
+    <p>
+        <div class="checkbox mb-3">
+            <label>
+                @Html.CheckBoxFor(m => m.RememberBrowser, new { id = "chkRememberBrowser" }) Remember browser
+            </label>
+        </div>
+    </p>
+    <p>
+        <input type="submit" class="btn btn-primary" value="Submit" />
+    </p>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

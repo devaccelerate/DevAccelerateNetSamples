@@ -1,0 +1,77 @@
+﻿@model Ejyle.DevAccelerate.Samples.AspNetMvc.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage Account";
+}
+@section BreadCrumb
+{
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Manage Account</li>
+    </ol>
+</nav>
+}
+<div>
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            @if (Model.HasPassword)
+            {
+                <span>********</span>
+                @Html.ActionLink("Change", "ChangePassword")
+            }
+            else
+            {
+                @Html.ActionLink("Create Password", "SetPassword")
+            }
+        </dd>
+        <dt>External Logins:</dt>
+        <dd>
+            @Model.Logins.Count external logins
+            &nbsp;@Html.ActionLink("Manage", "ManageLogins")
+        </dd>
+        <dt>Phone Number:</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "No phone number added")
+            @if (Model.PhoneNumber != null)
+            {
+                <br />
+                <text>[&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
+                }
+            }
+            else
+            {
+                <text>&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")</text>
+            }
+            </dd>
+            <dt>Two-Factor Authentication:</dt>
+            <dd>
+                @if (Model.TwoFactor)
+                {
+                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <p>Two-factor authentication is currently <span class="badge badge-success">enabled</span>. For better security of your account, it is recommended to keep it enabled.</p>
+                        <p>
+                            <input type="submit" value="Disable Two-Factor Authentication" class="btn btn-primary" />
+                        </p>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <p>Two-factor authentication is currently <span class="badge badge-warning">disabled</span>. Click on the <strong>Enable Two-Factor Authentication</strong> button to enable it.</p>
+                        <p>
+                            <input type="submit" value="Enable Two-Factor Authentication" class="btn btn-primary" />
+                        </p>
+                    }
+                }
+            </dd>
+        </dl>
+    </div>
