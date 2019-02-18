@@ -27,12 +27,6 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc
                       "~/Content/font-awesome.css",
                       "~/Content/default-layout.css",
                       "~/Content/common.css"));
-
-            bundles.Add(new StyleBundle("~/Content/sidebarLayoutCss").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/font-awesome.css",
-                      "~/Content/sidebar-layout.css",
-                      "~/Content/common.css"));
         }
     }
 }

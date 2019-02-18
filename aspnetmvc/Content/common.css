@@ -1,0 +1,23 @@
+﻿input,
+select,
+textarea {
+    max-width: 380px;
+}
+
+.subtitle {
+    font-size: .7em;
+    color: #666;
+}
+
+.ico-button {
+    color: #666;
+    margin-right: 15px;
+}
+
+.ico-toggle-on {
+    color: forestgreen;
+}
+
+.ico-toggle-off {
+    color: darkorange;
+}
