@@ -16,9 +16,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Ejyle.DevAccelerate.Samples.AspNetMvc.Models;
+using Ejyle.DevAccelerate.Subscriptions;
+using Ejyle.DevAccelerate.Subscriptions.EF;
 using System.Collections.Generic;
 using Ejyle.DevAccelerate.Identity.AspNet.EF;
 using System.Net;
+using Ejyle.DevAccelerate.Facades.Security.Authentication;
 
 namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
 {
@@ -27,15 +30,34 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
     {
         private DaSignInManager _signInManager;
         private DaUserManager _userManager;
+        private DaAuthenticationFacade _authenticationFacade = null;
 
         public AccountController()
         {
         }
 
-        public AccountController(DaUserManager userManager, DaSignInManager signInManager )
+        public AccountController(DaUserManager userManager, DaSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+
+
+        public DaAuthenticationFacade AuthenticationFacade
+        {
+            get
+            {
+                if (_authenticationFacade == null)
+                {
+                    _authenticationFacade = new DaAuthenticationFacade(UserManager, new DaTenantManager(new DaTenantRepository(HttpContext.GetOwinContext().Get<DaAspNetIdentityDbContext>())), SignInManager, new DaUserSessionManager(new DaUserSessionRepository(HttpContext.GetOwinContext().Get<DaAspNetIdentityDbContext>())));
+                }
+
+                return _authenticationFacade;
+            }
+            set
+            {
+                _authenticationFacade = value;
+            }
         }
 
         public DaSignInManager SignInManager
@@ -44,9 +66,9 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<DaSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -83,9 +105,13 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await AuthenticationFacade.AuthenticateAsync(Request, Session, new DaUserAccountCredentialsInfo()
+            {
+                Username = model.Username,
+                Password = model.Password,
+                RememberUser = model.RememberMe
+            });
+
             switch (result)
             {
                 case SignInStatus.Success:
