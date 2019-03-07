@@ -22,6 +22,8 @@ using System.Collections.Generic;
 using Ejyle.DevAccelerate.Identity.AspNet.EF;
 using System.Net;
 using Ejyle.DevAccelerate.Facades.Security.Authentication;
+using Ejyle.DevAccelerate.Identity.AspNet.EF.Tenants;
+using Ejyle.DevAccelerate.Identity.AspNet.EF.UserSessions;
 
 namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
 {
@@ -112,6 +114,11 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
                 RememberUser = model.RememberMe
             });
 
+            /*
+             * Calling the method synchronously
+            var result = Ejyle.DevAccelerate.Core.DaAsyncHelper.RunSync<SignInStatus>(() => AuthenticationFacade.AuthenticateAsync(Request, Session, new DaUserAccountCredentialsInfo()));
+            */
+
             switch (result)
             {
                 case SignInStatus.Success:
@@ -119,7 +126,7 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
@@ -247,7 +254,7 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
 
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, protocol: Request.Url.Scheme);		
                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
@@ -346,7 +353,7 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
             {
                 return View("Error");
             }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, model.ReturnUrl, model.RememberMe });
         }
 
         //
