@@ -1,0 +1,36 @@
+﻿@using Ejyle.DevAccelerate.Samples.AspNetMvc.Models
+@model RegisterViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm("Register", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p>
+        <label for="inputUsername">Email</label>
+        @Html.TextBoxFor(m => m.Email, new { id = "inputEmail", @class = "form-control", @placeholder = "Username" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        <label for="inputPassword">Password</label>
+        @Html.PasswordFor(m => m.Password, new { id = "inputPassword", @class = "form-control", @placeholder = "Password" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        <label for="inputPassword">Confirm Password</label>
+        @Html.PasswordFor(m => m.ConfirmPassword, new { id = "inputConfirmPassword", @class = "form-control", @placeholder = "Confirm Password" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </p>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
