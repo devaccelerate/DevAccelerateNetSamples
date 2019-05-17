@@ -16,14 +16,14 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Ejyle.DevAccelerate.Samples.AspNetMvc.Models;
-using Ejyle.DevAccelerate.Subscriptions;
-using Ejyle.DevAccelerate.Subscriptions.EF;
 using System.Collections.Generic;
-using Ejyle.DevAccelerate.Identity.AspNet.EF;
+using Ejyle.DevAccelerate.Identity.EF;
 using System.Net;
 using Ejyle.DevAccelerate.Facades.Security.Authentication;
-using Ejyle.DevAccelerate.Identity.AspNet.EF.Tenants;
-using Ejyle.DevAccelerate.Identity.AspNet.EF.UserSessions;
+using Ejyle.DevAccelerate.Identity.EF.UserSessions;
+using Ejyle.DevAccelerate.EnterpriseSecurity.EF.Tenants;
+using Ejyle.DevAccelerate.Facades.Security.Subscriptions;
+using Ejyle.DevAccelerate.EnterpriseSecurity.Tenants;
 
 namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
 {
@@ -33,6 +33,8 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
         private DaSignInManager _signInManager;
         private DaUserManager _userManager;
         private DaAuthenticationFacade _authenticationFacade = null;
+        private DaSubscriptionPlanFacade _subscriptionPlanFacade = null;
+        private DaSubscriptionFacade _subscriptionFacade = null;
 
         public AccountController()
         {
@@ -51,7 +53,7 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
             {
                 if (_authenticationFacade == null)
                 {
-                    _authenticationFacade = new DaAuthenticationFacade(UserManager, new DaTenantManager(new DaTenantRepository(HttpContext.GetOwinContext().Get<DaAspNetIdentityDbContext>())), SignInManager, new DaUserSessionManager(new DaUserSessionRepository(HttpContext.GetOwinContext().Get<DaAspNetIdentityDbContext>())));
+                    _authenticationFacade = new DaAuthenticationFacade(UserManager, new DaTenantManager(new DaTenantRepository(HttpContext.GetOwinContext().Get<DaIdentityDbContext>())), SignInManager, new DaUserSessionManager(new DaUserSessionRepository(HttpContext.GetOwinContext().Get<DaIdentityDbContext>())));
                 }
 
                 return _authenticationFacade;
@@ -59,6 +61,40 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
             set
             {
                 _authenticationFacade = value;
+            }
+        }
+
+        public DaSubscriptionPlanFacade SubscriptionPlanFacade
+        {
+            get
+            {
+                if (_subscriptionPlanFacade == null)
+                {
+                    _subscriptionPlanFacade = new DaSubscriptionPlanFacade(HttpContext.GetOwinContext());
+                }
+
+                return _subscriptionPlanFacade;
+            }
+            set
+            {
+                _subscriptionPlanFacade = value;
+            }
+        }
+
+        public DaSubscriptionFacade SubscriptionFacade
+        {
+            get
+            {
+                if (_subscriptionFacade == null)
+                {
+                    _subscriptionFacade = new DaSubscriptionFacade(HttpContext.GetOwinContext());
+                }
+
+                return _subscriptionFacade;
+            }
+            set
+            {
+                _subscriptionFacade = value;
             }
         }
 
@@ -177,12 +213,30 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public async Task<ActionResult> ChooseSubscription()
+        {
+            var model = await SubscriptionPlanFacade.GetSubscriptionPlansAsync();
+            return View(model);
+        }
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(int? subscriptionPlanId, int? billingCycleId)
         {
-            return View();
+            if(subscriptionPlanId == null || billingCycleId == null)
+            {
+                return RedirectToAction("ChooseSubscription");
+            }
+
+            var model = new RegisterViewModel()
+            {
+                SubscriptionPlanId = (int)subscriptionPlanId,
+                BillingCycleId = (int)billingCycleId
+            };
+
+            return View(model);
         }
 
         //
@@ -194,13 +248,17 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new DaUser()
+                var subscriptionInfo = new DaSubscriptionInfo()
                 {
+                    Email = model.Email,
                     UserName = model.Email,
-                    Email = model.Email
+                    TenantType = DaTenantType.Individual,
+                    OrganizationName = null,
+                    SubscriptionPlanId = (int)model.SubscriptionPlanId,
+                    BillingCycleId = (int)model.BillingCycleId
                 };
 
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var result = await SubscriptionFacade.SubscribeAsync(subscriptionInfo, model.Password);
 
                 if (result.Succeeded)
                 {

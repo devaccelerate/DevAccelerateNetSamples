@@ -1,0 +1,44 @@
+﻿@using Ejyle.DevAccelerate.Facades.Security.Subscriptions
+@model List<DaSubscriptionPlanInfo>
+
+@{
+    ViewBag.Title = "Choose Subscription";
+}
+
+<div class="row">
+    @foreach (var sp in Model)
+    {
+    <div class="card col-md-4">
+        <div class="card-body">
+            <h5 class="card-title"><strong>@sp.Name</strong></h5>
+            <p class="card-text">@sp.Description</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            @foreach (var app in sp.Apps)
+            {
+                <li class="list-group-item"><strong>@app.Name</strong></li>
+                foreach (var feature in app.Features)
+                {
+                    <li class="list-group-item">@feature.Name
+            @if(feature.Attributes != null)
+            {
+                foreach(var attrib in feature.Attributes)
+                {
+                    <span class="badge badge-info">@attrib.Name: @attrib.Value</span> 
+                }
+            }
+            </li>
+                }
+            }
+        </ul>
+        <div class="card-body">
+            @foreach (var bc in sp.BillingCycles)
+            {
+                <p><a href="@Url.Action("Register", "Account", new { subscriptionPlanId = sp.Id, billingCycleId = bc.Id })" class="btn btn-primary">@bc.Amount / @bc.Name</a></p>
+            }
+        </div>
+    </div>
+    }
+</div>
+
+

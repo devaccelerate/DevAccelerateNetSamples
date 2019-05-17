@@ -5,6 +5,7 @@
 // Licensed under the MIT license. See the LICENSE file in the project's root directory for complete license information.
 // ----------------------------------------------------------------------------------------------------------------------
 
+using Ejyle.DevAccelerate.EnterpriseSecurity.SubscriptionPlans;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
@@ -86,6 +87,9 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Models
         [Display(Name = "Confirm password")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public int? SubscriptionPlanId { get; set; }
+        public int? BillingCycleId { get; set; }
     }
 
     public class SubscribeViewModel
@@ -144,5 +148,33 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class SubscriptionPlanViewModel
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Code { get; set; }
+        public int? MaximumUsers { get; set; }
+        public bool IsFeatured { get; set; }
+    }
+
+    public class BillingCycleViewModel
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DaBillingCycleType BillingCycleType { get; set; }
+        public int BillingCycleDuration { get; set; }
+        public decimal Amount { get; set; }
+        public int CurrencyId { get; set; }
+        public bool AllowTrial { get; set; }
+        public bool StartOnlyWithTrial { get; set; }
+        public int? TrialDuration { get; set; }
+    }
+
+    public class AppViewModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

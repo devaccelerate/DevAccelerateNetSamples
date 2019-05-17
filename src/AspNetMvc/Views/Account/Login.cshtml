@@ -33,6 +33,9 @@
     <p>
         @Html.ActionLink("Forgot your password?", "ForgotPassword")
     </p>
+    <p>
+        @Html.ActionLink("Create New Account", "ChooseSubscription")
+    </p>
     <section id="socialLoginForm">
         @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
     </section>

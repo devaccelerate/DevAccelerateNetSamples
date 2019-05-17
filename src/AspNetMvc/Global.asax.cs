@@ -3,11 +3,11 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Ejyle.DevAccelerate.Apps;
 using Ejyle.DevAccelerate.Core;
 using Ejyle.DevAccelerate.Core.Configuration;
 using Ejyle.DevAccelerate.Core.Data;
-using Ejyle.DevAccelerate.Identity.AspNet;
+using Ejyle.DevAccelerate.EnterpriseSecurity.Apps;
+using Ejyle.DevAccelerate.Identity;
 using Ejyle.DevAccelerate.Mail;
 using Ejyle.DevAccelerate.Sms;
 

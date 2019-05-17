@@ -14,7 +14,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Ejyle.DevAccelerate.Samples.AspNetMvc.Models;
-using Ejyle.DevAccelerate.Identity.AspNet.EF;
+using Ejyle.DevAccelerate.Identity.EF;
 
 namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
 {

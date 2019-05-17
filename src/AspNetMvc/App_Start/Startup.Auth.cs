@@ -13,10 +13,10 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using Ejyle.DevAccelerate.Samples.AspNetMvc.Models;
-using Ejyle.DevAccelerate.Identity.AspNet;
+using Ejyle.DevAccelerate.Identity;
 using Ejyle.DevAccelerate.List.EF;
-using Ejyle.DevAccelerate.Identity.AspNet.EF;
-using Ejyle.DevAccelerate.Apps.EF;
+using Ejyle.DevAccelerate.Identity.EF;
+using Ejyle.DevAccelerate.EnterpriseSecurity.EF;
 
 namespace Ejyle.DevAccelerate.Samples.AspNetMvc
 {
@@ -26,9 +26,9 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(DaAspNetIdentityDbContext.Create);
-            app.CreatePerOwinContext(DaAppsDbContext.Create);
+            app.CreatePerOwinContext(DaIdentityDbContext.Create);
             app.CreatePerOwinContext(DaListsDbContext.Create);
+            app.CreatePerOwinContext(DaEnterpriseSecurityDbContext.Create);
             app.CreatePerOwinContext<DaUserManager>(DaUserManager.Create);
             app.CreatePerOwinContext<DaSignInManager>(DaSignInManager.Create);
 
