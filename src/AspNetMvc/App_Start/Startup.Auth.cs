@@ -17,6 +17,7 @@ using Ejyle.DevAccelerate.Identity;
 using Ejyle.DevAccelerate.List.EF;
 using Ejyle.DevAccelerate.Identity.EF;
 using Ejyle.DevAccelerate.EnterpriseSecurity.EF;
+using Ejyle.DevAccelerate.Profiles.EF;
 
 namespace Ejyle.DevAccelerate.Samples.AspNetMvc
 {
@@ -29,6 +30,7 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc
             app.CreatePerOwinContext(DaIdentityDbContext.Create);
             app.CreatePerOwinContext(DaListsDbContext.Create);
             app.CreatePerOwinContext(DaEnterpriseSecurityDbContext.Create);
+            app.CreatePerOwinContext(DaProfilesDbContext.Create);
             app.CreatePerOwinContext<DaUserManager>(DaUserManager.Create);
             app.CreatePerOwinContext<DaSignInManager>(DaSignInManager.Create);
 
