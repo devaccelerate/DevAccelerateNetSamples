@@ -62,7 +62,7 @@
       <HintPath>..\packages\DevAccelerateEnterpriseSecurityEF.6.0.0-preview1\lib\Ejyle.DevAccelerate.EnterpriseSecurity.EF.dll</HintPath>
     </Reference>
     <Reference Include="Ejyle.DevAccelerate.Facades.Security, Version=6.0.0.0, Culture=neutral, PublicKeyToken=22d23218bd0b72cc, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevAccelerateSecurityFacade.6.0.0-preview5\lib\Ejyle.DevAccelerate.Facades.Security.dll</HintPath>
+      <HintPath>..\packages\DevAccelerateSecurityFacade.6.0.0-preview6\lib\Ejyle.DevAccelerate.Facades.Security.dll</HintPath>
     </Reference>
     <Reference Include="Ejyle.DevAccelerate.Identity, Version=6.0.0.0, Culture=neutral, PublicKeyToken=6e10ba72f5241b59, processorArchitecture=MSIL">
       <HintPath>..\packages\DevAccelerateIdentity.6.0.0-preview1\lib\Ejyle.DevAccelerate.Identity.dll</HintPath>
@@ -83,10 +83,10 @@
       <HintPath>..\packages\DevAccelerateMailSendGrid.6.0.0-preview2\lib\Ejyle.DevAccelerate.Mail.SendGrid.dll</HintPath>
     </Reference>
     <Reference Include="Ejyle.DevAccelerate.Profiles, Version=6.0.0.0, Culture=neutral, PublicKeyToken=704ea7d9f600d1b9, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevAccelerateProfiles.6.0.0-preview1\lib\Ejyle.DevAccelerate.Profiles.dll</HintPath>
+      <HintPath>..\packages\DevAccelerateProfiles.6.0.0-preview2\lib\Ejyle.DevAccelerate.Profiles.dll</HintPath>
     </Reference>
     <Reference Include="Ejyle.DevAccelerate.Profiles.EF, Version=6.0.0.0, Culture=neutral, PublicKeyToken=3a5cc1b6ca60d324, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevAccelerateProfilesEF.6.0.0-preview1\lib\Ejyle.DevAccelerate.Profiles.EF.dll</HintPath>
+      <HintPath>..\packages\DevAccelerateProfilesEF.6.0.0-preview2\lib\Ejyle.DevAccelerate.Profiles.EF.dll</HintPath>
     </Reference>
     <Reference Include="Ejyle.DevAccelerate.Sms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=6942263d6afce94f, processorArchitecture=MSIL">
       <HintPath>..\packages\DevAccelerateSms.6.0.0-preview5\lib\Ejyle.DevAccelerate.Sms.dll</HintPath>

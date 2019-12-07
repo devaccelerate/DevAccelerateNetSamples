@@ -90,6 +90,10 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Models
 
         public int? SubscriptionPlanId { get; set; }
         public int? BillingCycleId { get; set; }
+        public string CompanyName { get; set; }
+        public string Address { get; set; }
+        public string State { get; set; }
+        public string ZipCode { get; set; }
     }
 
     public class SubscribeViewModel

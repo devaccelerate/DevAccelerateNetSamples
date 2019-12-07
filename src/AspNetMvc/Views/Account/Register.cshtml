@@ -28,6 +28,26 @@
         @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
     </p>
     <p>
+        <label for="inputCompanyName">Company Name</label>
+        @Html.TextBoxFor(m => m.CompanyName, new { id = "inputCompanyName", @class = "form-control", @placeholder = "Company Name" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        <label for="inputAddress">Address</label>
+        @Html.TextBoxFor(m => m.Address, new { id = "inputAddress", @class = "form-control", @placeholder = "Address" })
+        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        <label for="inputState">State</label>
+        @Html.TextBoxFor(m => m.State, new { id = "inputState", @class = "form-control", @placeholder = "State" })
+        @Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger" })
+    </p>
+    <p>
+        <label for="inputZipCode">Zip Code</label>
+        @Html.TextBoxFor(m => m.ZipCode, new { id = "inputZipCode", @class = "form-control", @placeholder = "Zip Code" })
+        @Html.ValidationMessageFor(m => m.ZipCode, "", new { @class = "text-danger" })
+    </p>
+    <p>
         <button class="btn btn-primary" type="submit">Register</button>
     </p>
 }

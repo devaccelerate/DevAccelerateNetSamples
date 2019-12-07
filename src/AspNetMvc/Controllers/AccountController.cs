@@ -253,9 +253,12 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
                     Email = model.Email,
                     UserName = model.Email,
                     TenantType = DaTenantType.Individual,
-                    OrganizationName = null,
+                    OrganizationName = model.CompanyName,
                     SubscriptionPlanId = (int)model.SubscriptionPlanId,
-                    BillingCycleId = (int)model.BillingCycleId
+                    BillingCycleId = (int)model.BillingCycleId,
+                    Address1 = model.Address,
+                    State = model.State,
+                    ZipCode = model.ZipCode
                 };
 
                 var result = await SubscriptionFacade.SubscribeAsync(subscriptionInfo, model.Password);
