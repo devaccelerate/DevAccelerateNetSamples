@@ -62,7 +62,7 @@
       <HintPath>..\packages\DevAccelerateEnterpriseSecurityEF.6.0.0-preview1\lib\Ejyle.DevAccelerate.EnterpriseSecurity.EF.dll</HintPath>
     </Reference>
     <Reference Include="Ejyle.DevAccelerate.Facades.Security, Version=6.0.0.0, Culture=neutral, PublicKeyToken=22d23218bd0b72cc, processorArchitecture=MSIL">
-      <HintPath>..\packages\DevAccelerateSecurityFacade.6.0.0-preview6\lib\Ejyle.DevAccelerate.Facades.Security.dll</HintPath>
+      <HintPath>..\packages\DevAccelerateSecurityFacade.6.0.0-preview8\lib\Ejyle.DevAccelerate.Facades.Security.dll</HintPath>
     </Reference>
     <Reference Include="Ejyle.DevAccelerate.Identity, Version=6.0.0.0, Culture=neutral, PublicKeyToken=6e10ba72f5241b59, processorArchitecture=MSIL">
       <HintPath>..\packages\DevAccelerateIdentity.6.0.0-preview1\lib\Ejyle.DevAccelerate.Identity.dll</HintPath>

@@ -252,7 +252,7 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
                 {
                     Email = model.Email,
                     UserName = model.Email,
-                    TenantType = DaTenantType.Individual,
+                    TenantType = DaTenantType.Organization,
                     OrganizationName = model.CompanyName,
                     SubscriptionPlanId = (int)model.SubscriptionPlanId,
                     BillingCycleId = (int)model.BillingCycleId,
@@ -260,6 +260,10 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
                     State = model.State,
                     ZipCode = model.ZipCode
                 };
+
+                // Examples of how to use attributes with arbitary keys and values.
+                subscriptionInfo.UserProfileAttributes.Add("Avatar", "Images/Photo.jpg");
+                subscriptionInfo.OrganizationProfileAttributes.Add("Logo", "Images/Logo.jpg");
 
                 var result = await SubscriptionFacade.SubscribeAsync(subscriptionInfo, model.Password);
 
