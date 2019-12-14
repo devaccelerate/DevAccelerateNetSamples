@@ -265,6 +265,9 @@ namespace Ejyle.DevAccelerate.Samples.AspNetMvc.Controllers
                 subscriptionInfo.UserProfileAttributes.Add("Avatar", "Images/Photo.jpg");
                 subscriptionInfo.OrganizationProfileAttributes.Add("Logo", "Images/Logo.jpg");
 
+                subscriptionInfo.SubscriptionAttributes.Add("Code", "65372");
+                subscriptionInfo.SubscriptionAttributes.Add("PlatformID", "HLHHIJJ214");
+
                 var result = await SubscriptionFacade.SubscribeAsync(subscriptionInfo, model.Password);
 
                 if (result.Succeeded)
