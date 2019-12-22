@@ -6,10 +6,10 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Ejyle.DevAccelerate.Samples.AspNetMvc")]
-[assembly: AssemblyDescription("Ejyle.DevAccelerate.Samples.AspNetMvc")]
+[assembly: AssemblyDescription("An ASP.NET MVC sample application for DevAccelerate.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ejyle Technologies (P) Ltd")]
-[assembly: AssemblyProduct("ASP.NET MVC Sample for DevAccelerate")]
+[assembly: AssemblyProduct("Ejyle.DevAccelerate.Samples.AspNetMvc")]
 [assembly: AssemblyCopyright("Copyright © Ejyle Technologies (P) Ltd. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -32,4 +32,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("6.0.0.0")]
-[assembly: AssemblyFileVersion("6.0.0.0")]
+[assembly: AssemblyFileVersion("6.0")]
